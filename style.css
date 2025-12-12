@@ -1,5 +1,132 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #121212;
+  --secondary-color: #f2f2f2;
+  --accent-color: #bb86fc;
+  --secondary-accent-color: #fccd86;
+
+  --header-height: 10vh;
+  --footer-height: 10vh;
+}
+
+a {
+  color: var(--secondary-accent-color);
+  transition: 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
 body {
-  background-color: #fff895;
-  color: #2b2b2b;
+  background-color: var(--secondary-color);
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+#flex-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  height: var(--header-height);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+main {
+  top: var(--header-height); /* Starts below the header */
+  bottom: var(--footer-height); /* Ends above the footer */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: calc(var(--footer-height) +20px);
+  height: auto;
+  overflow-y: auto;
+}
+
+#showHideImg {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 100px;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+#counterContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+footer {
+  display: flex;
+  position: sticky;
+  flex-wrap: wrap;
+  height: var(--footer-height);
+  flex-shrink: 0;
+  bottom: 0;
+  justify-content: space-evenly;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-top: 2px solid var(--accent-color);
+  margin-top: auto; /* Pushes the footer to the bottom of the flex container */
+}
+
+.footer-part-1 {
+  display: flex;
+  flex-basis: 100%;
+  background-color: var(--primary-color);
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.footer-part-2 {
+  display: flex;
+  flex-basis: 100%;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--accent-color);
 }

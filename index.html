@@ -6,8 +6,42 @@
     <link rel="stylesheet" href="style.css" />
     <title>Lee Curtis - Portfolio</title>
   </head>
+
   <body>
-    <h1>This is a placeholder page</h1>
-    <a href="/weather-dashboard/">Click Me</a>
+    <!-- This defines the overall layout of the page -->
+    <div id="flex-layout">
+      <!-- This is the header-container -->
+      <div class="header-container">
+        <!-- This is the header section -->
+        <header>
+          <h1>header</h1>
+        </header>
+        <!-- This is the navigation section -->
+        <nav>
+          <a href="#placeholder">Placeholder</a>
+          <a href="/weather-dashboard/">Weather Dashboard</a>
+        </nav>
+      </div>
+
+      <!-- This is the main section -->
+      <main>
+        <div id="top"></div>
+        <button id="darkMode">🌙</button>
+      </main>
+
+      <!-- This is the footer section -->
+      <footer>
+        <div class="footer-part-1">
+          <a href="#top">Back to top</a>
+        </div>
+        <div class="footer-part-2">
+          © Lee Curtis
+          <script type="text/javascript">
+            document.write(new Date().getUTCFullYear());
+          </script>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
