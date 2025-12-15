@@ -1,47 +1,40 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- * Preloads the CSS files for header and footer early so they load faster and help avoid layout shifts -->
+    <link rel="preload" href="header.css" as="style" />
+    <link rel="preload" href="footer.css" as="style" />
+
+    <!-- * Links the main stylesheet that controls the overall look and layout of the page -->
     <link rel="stylesheet" href="style.css" />
+
     <title>Lee Curtis - Portfolio</title>
   </head>
 
   <body>
-    <!-- This defines the overall layout of the page -->
-    <div id="flex-layout">
-      <!-- This is the header-container -->
-      <div class="header-container">
-        <!-- This is the header section -->
-        <header>
-          <h1>header</h1>
-        </header>
-        <!-- This is the navigation section -->
-        <nav>
-          <a href="#placeholder">Placeholder</a>
-          <a href="/weather-dashboard/">Weather Dashboard</a>
-        </nav>
-      </div>
+    <!-- * Loads the script that dynamically adds the header and footer content into the page (using custom elements) -->
+    <script src="headerFooterManager.js"></script>
 
-      <!-- This is the main section -->
+    <!-- * Main container that uses flexbox to arrange header, main content, and footer vertically -->
+    <div id="flex-layout">
+      <!-- * Custom header element - class hides it initially to prevent flash of unstyled content (FOUC) until it's ready -->
+      <custom-header class="fouc-hidden"></custom-header>
+
+      <!-- * Main content section where the portfolio projects and other page content will go -->
       <main>
+        <!-- ? Empty div used as an anchor point so "back to top" links can smoothly scroll here -->
         <div id="top"></div>
-        <button id="darkMode">🌙</button>
       </main>
 
-      <!-- This is the footer section -->
-      <footer>
-        <div class="footer-part-1">
-          <a href="#top">Back to top</a>
-        </div>
-        <div class="footer-part-2">
-          © Lee Curtis
-          <script type="text/javascript">
-            document.write(new Date().getUTCFullYear());
-          </script>
-        </div>
-      </footer>
+      <!-- * Custom footer element - also hidden initially to prevent flash of unstyled content (FOUC) -->
+      <custom-footer class="fouc-hidden"></custom-footer>
     </div>
+
+    <!-- * Main JavaScript file that handles interactive features like the dark mode toggle and any other page logic -->
     <script src="script.js"></script>
   </body>
 </html>

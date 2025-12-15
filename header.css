@@ -1,0 +1,159 @@
+/* header.css */
+
+/* ---------------------------------------------------------------------- */
+/* * The :host selector targets the <custom-header> element itself. */
+/* * STATIC DARK THEME - Will NOT change with the main page toggle. */
+/* ---------------------------------------------------------------------- */
+:host {
+  display: block;
+  height: var(
+    --header-height
+  ); /* ! MAINTAINS 10vh HEIGHT (inherited from :root layout variables) */
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  /* * Replaced inherited variables with STATIC dark theme colors */
+  background-color: #121212; /* Dark Background */
+  color: #f2f2f2; /* Light Text */
+  border-bottom: 2px solid #bb86fc; /* Primary Accent Border */
+}
+
+/* ---------------------------------------------------------------------- */
+/* * Styles for the internal <header> element (the main bar) */
+/* ---------------------------------------------------------------------- */
+header {
+  display: flex; /* ! Activates Flexbox */
+  flex-wrap: wrap; /* ! Allows items to wrap to a new line */
+  justify-content: center; /* * Centers content horizontally */
+  align-content: space-evenly; /* * Vertically distributes the two rows */
+  align-items: center; /* * Centers items within their own row (important for toggle) */
+  height: 100%;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* * Header Title (Row 1) */
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+  width: 100%; /* ! Forces H1 to take full width and wrap NAV below it */
+  text-align: center; /* * Centers the text within the 100% width */
+}
+
+/* * Navigation Links Container (Row 2, centered) */
+nav {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* * Important: makes NAV take full width for centering */
+}
+
+/* * Style the unordered list */
+nav ul {
+  display: flex; /* * Lays out the list items horizontally */
+  list-style: none; /* * Removes bullet points */
+  padding: 0;
+  margin: 0;
+  gap: 20px; /* * Space between links */
+}
+
+/* * Link Styling (Encapsulated) - Static Colors */
+a {
+  /* * Replaced inherited variable with STATIC accent color */
+  color: #fccd86;
+  transition: 0.2s ease-in-out;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  /* * Replaced inherited variable with STATIC hover color */
+  color: #f2f2f2;
+}
+
+/* ---------------------------------- */
+/* * DARK MODE TOGGLE STYLES (The toggle is visually static in the header) */
+/* ---------------------------------- */
+
+.toggle-container {
+  /* ! Absolute positioning is necessary here to place the toggle */
+  position: absolute;
+  top: 50%; /* * Start at vertical center of the header */
+  right: 20px; /* * Aligned with the header's right padding */
+  transform: translateY(
+    -50%
+  ); /* * Pulls the element up by half its height for perfect center */
+}
+
+/* * 1. Hide the actual checkbox input */
+.checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* * 2. Style the visible switch element (the track) - Static Color */
+.switch {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 56px;
+  height: 32px;
+
+  background: #e9e9e9;
+  border-radius: 16px;
+  cursor: pointer;
+  position: relative;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* * 3. Style the icons (They stay fixed inside the track) - Static Colors */
+.icon {
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  z-index: 2;
+  font-family: Arial, sans-serif;
+}
+
+/* * Icon colors (Static) */
+.moon {
+  color: #121212;
+}
+
+.sun {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* * 4. The SLIDING KNOB/THUMB (Moves back and forth) */
+.switch::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+/* * 5. State Change: When the checkbox is CHECKED (Dark Mode) */
+
+/* * When checked, change the TRACK color to a STATIC accent color */
+.checkbox:checked + .switch {
+  background-color: #bb86fc;
+}
+
+/* * When checked, move the SLIDING KNOB to the right */
+.checkbox:checked + .switch::after {
+  transform: translateX(26px);
+}

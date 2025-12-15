@@ -1,132 +1,133 @@
+/* style.css */
+
+/* ---------------------------------------------------------------------- */
+/* * Universal Reset: Ensures consistent box model across all browsers */
+/* ---------------------------------------------------------------------- */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* * The border and padding are included in the element's total width and height */
 }
 
+/* ---------------------------------------------------------------------- */
+/* * CSS Custom Properties (Variables) defined on the highest level */
+/* ---------------------------------------------------------------------- */
 :root {
-  --primary-color: #121212;
-  --secondary-color: #f2f2f2;
-  --accent-color: #bb86fc;
-  --secondary-accent-color: #fccd86;
-
+  /* * Layout variables used by the global flex container and component sizing */
   --header-height: 10vh;
   --footer-height: 10vh;
 }
 
+/* ---------------------------------- */
+/* * SMOOTH TRANSITIONS */
+/* ---------------------------------- */
+
+/* * Apply smooth transition to all elements that use our color variables */
+/* * The transition applies to the root element and elements that inherit colors. */
+:root,
+body,
+main,
 a {
-  color: var(--secondary-accent-color);
-  transition: 0.2s ease-in-out;
-  font-weight: 500;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out;
 }
 
-a:hover {
-  color: var(--secondary-color);
+/* ---------------------------------- */
+/* * FOUC PREVENTION STYLES (Anti-Flash of Unstyled Content) */
+/* ---------------------------------- */
+
+/* * 1. Hides the components using the class applied in index.html */
+.fouc-hidden {
+  visibility: hidden; /* * Hides the element visually */
+  opacity: 0; /* * Makes it transparent */
+
+  /* ! Important Fix for Layout Shift: We force it to still reserve space. */
+  display: block !important;
+  height: var(--header-height) !important;
 }
 
+/* * 2. Hides the component BEFORE JavaScript defines it (pure browser protection) */
+custom-header:not(:defined) {
+  visibility: hidden;
+  opacity: 0;
+  display: block;
+  height: var(--header-height); /* * Reserves the header's height (10vh) */
+}
+
+custom-footer:not(:defined) {
+  visibility: hidden;
+  opacity: 0;
+  display: block;
+  height: var(--footer-height); /* * RESERVES THE FOOTER'S HEIGHT (10vh) */
+}
+
+/* ---------------------------------- */
+/* * GLOBAL LAYOUT STYLES & DEFAULT (LIGHT) THEME */
+/* ---------------------------------- */
+
+/* * Base styling for the document body (Light Mode Defaults) */
 body {
-  background-color: var(--secondary-color);
+  /* * These variables define the LIGHT THEME and are only available to the body and main content. */
+  --main-bg-color: #f2f2f2;
+  --main-text-color: #121212;
+  --main-accent-link: #fccd86;
+  --main-accent-highlight: #bb86fc;
+
+  background-color: var(--main-bg-color); /* * Default background color */
+  color: var(
+    --main-text-color
+  ); /* * Default text color for Light DOM content */
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   padding: 0px;
 }
 
+/* ---------------------------------- */
+/* * DARK THEME STYLES (Applied via JS adding class="dark-theme" to body) */
+/* ---------------------------------- */
+body.dark-theme {
+  /* * Swaps the variables for Dark Mode */
+  --main-bg-color: #121212;
+  --main-text-color: #f2f2f2;
+  --main-accent-link: #bb86fc;
+  --main-accent-highlight: #fccd86;
+}
+
+/* ---------------------------------- */
+/* * GLOBAL LINK STYLING */
+/* ---------------------------------- */
+
+/* * Global link styling. NOTE: This only affects links in the Light DOM (like inside <main>). */
+a {
+  color: var(--main-accent-link);
+  transition: 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+/* * Main container for the entire page to enable sticky header/footer layout */
 #flex-layout {
   display: flex;
-  flex-direction: column;
-  height: 100vh;
+  flex-direction: column; /* * Stacks children (header, main, footer) vertically */
+  height: 100vh; /* * Takes up the full height of the viewport */
 }
 
-.header-container {
-  display: flex;
-  flex-direction: column;
-  height: var(--header-height);
-  flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border-bottom: 2px solid var(--accent-color);
-}
-
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60%;
-}
-
-nav {
-  display: flex;
-  justify-content: space-evenly;
-  flex-grow: 1;
-}
-
+/* * Styles for the central content area */
 main {
-  top: var(--header-height); /* Starts below the header */
-  bottom: var(--footer-height); /* Ends above the footer */
+  /* ? Why are top/bottom styles here? This is just referencing the header/footer height */
+  top: var(--header-height);
+  bottom: var(--footer-height);
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--secondary-color);
-  padding: calc(var(--footer-height) +20px);
+  background-color: var(
+    --main-bg-color
+  ); /* * Uses the dynamic theme variable */
+
+  /* * Calculates padding to ensure content starts below the sticky header */
+  padding: calc(var(--footer-height) + 20px);
   height: auto;
-  overflow-y: auto;
-}
-
-#showHideImg {
-  display: flex;
-  flex-direction: column;
-  min-width: 200px;
-  min-height: 100px;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-}
-
-#counterContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-}
-
-footer {
-  display: flex;
-  position: sticky;
-  flex-wrap: wrap;
-  height: var(--footer-height);
-  flex-shrink: 0;
-  bottom: 0;
-  justify-content: space-evenly;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border-top: 2px solid var(--accent-color);
-  margin-top: auto; /* Pushes the footer to the bottom of the flex container */
-}
-
-.footer-part-1 {
-  display: flex;
-  flex-basis: 100%;
-  background-color: var(--primary-color);
-  justify-content: center;
-  align-items: center;
-  border-bottom: 2px solid var(--accent-color);
-}
-
-.footer-part-2 {
-  display: flex;
-  flex-basis: 100%;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  justify-content: center;
-  align-items: center;
-  border-bottom: 2px solid var(--accent-color);
+  overflow-y: auto; /* * Allows vertical scrolling if content is too long */
 }
