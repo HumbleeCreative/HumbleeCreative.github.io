@@ -1,4 +1,6 @@
 // headerFooterManager.js
+// * Define the repository path once for convenience
+const REPO_PATH = "/HumbleeCreative.github.io";
 
 // * Define the current year once for use in the footer.
 const currentYear = new Date().getFullYear();
@@ -17,7 +19,7 @@ const footerSheet = new CSSStyleSheet();
 // * to prevent a nasty Flash of Unstyled Content (FOUC).
 const stylePromise = Promise.all([
   // * We use the native fetch API to grab the CSS file content.
-  fetch("./header.css")
+  fetch(`${REPO_PATH}/header.css`)
     .then((response) => response.text()) // * Get the raw CSS code as a string.
     // * replaceSync() is a method that converts the CSS string into a usable Stylesheet object.
     .then((css) => headerSheet.replaceSync(css))
@@ -25,7 +27,7 @@ const stylePromise = Promise.all([
     .catch((err) => console.error("! Failed to load header.css:", err)),
 
   // * Repeat the process for the footer's CSS file.
-  fetch("./footer.css")
+  fetch(`${REPO_PATH}/footer.css`)
     .then((response) => response.text())
     .then((css) => footerSheet.replaceSync(css))
     .catch((err) => console.error("! Failed to load footer.css:", err)),

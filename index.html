@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- * Preloads the CSS files for header and footer early so they load faster and help avoid layout shifts -->
-    <link rel="preload" href="header.css" as="style" />
-    <link rel="preload" href="footer.css" as="style" />
+    <link
+      rel="preload"
+      href="/HumbleeCreative.github.io/header.css"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="/HumbleeCreative.github.io/footer.css"
+      as="style"
+    />
 
     <!-- * Links the main stylesheet that controls the overall look and layout of the page -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/HumbleeCreative.github.io/style.css" />
 
     <title>Lee Curtis - Portfolio</title>
   </head>
 
   <body>
     <!-- * Loads the script that dynamically adds the header and footer content into the page (using custom elements) -->
-    <script src="headerFooterManager.js"></script>
+    <script src="/HumbleeCreative.github.io/headerFooterManager.js"></script>
 
     <!-- * Main container that uses flexbox to arrange header, main content, and footer vertically -->
     <div id="flex-layout">
@@ -28,6 +36,7 @@
       <main>
         <!-- ? Empty div used as an anchor point so "back to top" links can smoothly scroll here -->
         <div id="top"></div>
+        <h1>This is a placeholder</h1>
       </main>
 
       <!-- * Custom footer element - also hidden initially to prevent flash of unstyled content (FOUC) -->
@@ -35,6 +44,6 @@
     </div>
 
     <!-- * Main JavaScript file that handles interactive features like the dark mode toggle and any other page logic -->
-    <script src="script.js"></script>
+    <script src="/HumbleeCreative.github.io/script.js"></script>
   </body>
 </html>
