@@ -53,6 +53,10 @@ body.dark-mode {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+  /* Disables double-tap zoom on mobile */
+  touch-action: manipulation;
 }
 
 body {
@@ -97,6 +101,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: -1; /* Keep behind everything */
+  overflow: hidden; /* Stops anything bleeding out of the container */
 }
 
 .grid-layer {
@@ -247,14 +252,15 @@ body {
   position: fixed;
   inset: 0;
   background: var(--nav-bg);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
   z-index: 200;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
+  will-change: opacity, visibility;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
