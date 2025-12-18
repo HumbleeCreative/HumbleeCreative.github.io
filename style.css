@@ -1,142 +1,943 @@
 /* style.css */
 
-/* ---------------------------------------------------------------------- */
-/* * Universal Reset: Ensures consistent box model across all browsers */
-/* ---------------------------------------------------------------------- */
+/* * --- Variables --- */
+:root {
+  --bg: #f0f2f5;
+  --text: #1e293b;
+  --text-muted: #64748b;
+
+  /* Glass effect */
+  --card: #cc8dff47;
+  --glass-border: #ffffffb3;
+  --nav-bg: #ffffffbf;
+  --border: #0f172a14;
+  --grid: #0f172a0a;
+
+  /* Main Colours */
+  --primary: #facc15;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --blue: #0ea5e9;
+
+  /* Tech Colours (used for data-skill) */
+  --color-html: #e34f26;
+  --color-css: #1572b6;
+  --color-javascript: #b45309;
+  --color-cs: #0891b2;
+  --color-nodejs: #166534;
+
+  --radius-small: 1.5rem;
+  --radius-large: 2.5rem;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode {
+  --bg: #0a0f1e;
+  --text: #ffffff;
+  --text-muted: #cbd5e1;
+  --card: #2f45884b;
+  --glass-border: #ffffff1a;
+  --nav-bg: #151a2dcc;
+  --border: #ffffff1a;
+  --grid: #1f2937;
+}
+
+/* * --- Global Resets --- */
 *,
 *::before,
 *::after {
-  box-sizing: border-box; /* * The border and padding are included in the element's total width and height */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ---------------------------------------------------------------------- */
-/* * HTML & BODY RESETS FOR FULL HEIGHT * */
-/* ---------------------------------------------------------------------- */
 html {
-  /* This is necessary for body { height: 100%; } to work */
-  height: 100%;
+  scroll-behavior: smooth;
 }
 
-/* ---------------------------------------------------------------------- */
-/* * CSS Custom Properties (Variables) defined on the highest level */
-/* ---------------------------------------------------------------------- */
-:root {
-  /* * Layout variables used by the global flex container and component sizing */
-  --header-height: 10vh;
-  --footer-height: 10vh;
-}
-
-/* ---------------------------------- */
-/* * SMOOTH TRANSITIONS */
-/* ---------------------------------- */
-
-/* * Apply smooth transition to all elements that use our color variables */
-/* * The transition applies to the root element and elements that inherit colors. */
-:root,
-body,
-main,
-a {
-  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
-    border-color 0.5s ease-in-out;
-}
-
-/* ---------------------------------- */
-/* * FOUC PREVENTION STYLES (Anti-Flash of Unstyled Content) */
-/* ---------------------------------- */
-
-/* * 1. Hides the components using the class applied in index.html */
-.fouc-hidden {
-  visibility: hidden; /* * Hides the element visually */
-  opacity: 0; /* * Makes it transparent */
-
-  /* ! Important Fix for Layout Shift: We force it to still reserve space. */
-  display: block !important;
-  height: var(--header-height) !important;
-}
-
-/* * 2. Hides the component BEFORE JavaScript defines it (pure browser protection) */
-custom-header:not(:defined) {
-  visibility: hidden;
-  opacity: 0;
-  display: block;
-  height: var(--header-height); /* * Reserves the header's height (10vh) */
-}
-
-custom-footer:not(:defined) {
-  visibility: hidden;
-  opacity: 0;
-  display: block;
-  height: var(--footer-height); /* * RESERVES THE FOOTER'S HEIGHT (10vh) */
-}
-
-/* ---------------------------------- */
-/* * GLOBAL LAYOUT STYLES & DEFAULT (LIGHT) THEME */
-/* ---------------------------------- */
-
-/* * Base styling for the document body (Light Mode Defaults) */
 body {
-  /* * These variables define the LIGHT THEME and are only available to the body and main content. */
-  --main-bg-color: #f2f2f2;
-  --main-text-color: #121212;
-  --main-accent-link: #fccd86;
-  --main-accent-highlight: #bb86fc;
+  font-family: "Spline Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
 
-  background-color: var(--main-bg-color); /* * Default background color */
-  color: var(
-    --main-text-color
-  ); /* * Default text color for Light DOM content */
-  height: 100%;
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   width: 100%;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
-  padding: 0px;
 }
 
-/* ---------------------------------- */
-/* * DARK THEME STYLES (Applied via JS adding class="dark-theme" to body) */
-/* ---------------------------------- */
-body.dark-theme {
-  /* * Swaps the variables for Dark Mode */
-  --main-bg-color: #121212;
-  --main-text-color: #f2f2f2;
-  --main-accent-link: #bb86fc;
-  --main-accent-highlight: #fccd86;
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
 }
 
-/* ---------------------------------- */
-/* * GLOBAL LINK STYLING */
-/* ---------------------------------- */
-
-/* * Global link styling. NOTE: This only affects links in the Light DOM (like inside <main>). */
-a {
-  color: var(--main-accent-link);
-  transition: 0.2s ease-in-out;
-  font-weight: 500;
+/* Responsive container padding */
+@media (max-width: 480px) {
+  .container,
+  .container-narrow {
+    padding: 0 1rem;
+  }
 }
 
-/* * Main container for the entire page to enable sticky header/footer layout */
-#flex-layout {
+.text-center {
+  text-align: center;
+}
+
+/* * --- Background Effects --- */
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* Keep behind everything */
+}
+
+.grid-layer {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.blur-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: pulse 10s infinite ease-in-out;
+}
+
+.purple-blob {
+  top: 15%;
+  left: 20%;
+  width: 350px;
+  height: 350px;
+  background: var(--purple);
+}
+
+.pink-blob {
+  bottom: 15%;
+  right: 20%;
+  width: 450px;
+  height: 450px;
+  background: var(--pink);
+  animation-duration: 15s; /* Different speed to purple blob */
+  animation-direction: reverse;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.1) translate(20px, -20px);
+    opacity: 0.25;
+  }
+}
+
+/* * --- Navigation Styles --- */
+.nav-container {
+  position: fixed;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
-  flex-direction: column; /* * Stacks children (header, main, footer) vertically */
-  height: 100vh; /* * Takes up the full height of the viewport */
+  justify-content: center;
+  padding: 0 1rem;
 }
 
-/* * Styles for the central content area */
-main {
-  /* ? Why are top/bottom styles here? This is just referencing the header/footer height */
-  top: var(--header-height);
-  bottom: var(--footer-height);
-  padding: 20px;
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--purple);
+}
+
+.nav-home-btn,
+.theme-toggle-btn,
+.menu-toggle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-home-btn {
+  background: var(--primary);
+  color: black;
+  border: none;
+  text-decoration: none;
+}
+
+.nav-connect-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* Theme icons */
+.sun-icon {
+  display: none;
+}
+.dark-mode .sun-icon {
+  display: block;
+}
+.dark-mode .moon-icon {
+  display: none;
+}
+
+/* * --- Mobile Overlay Styles --- */
+
+.menu-toggle-btn {
+  display: none; /* Hidden on desktop */
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-links {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: var(
-    --main-bg-color
-  ); /* * Uses the dynamic theme variable */
+  gap: 2.5rem;
+  text-align: center;
+  list-style: none;
+}
 
-  /* * Calculates padding to ensure content starts below the sticky header */
-  padding: calc(var(--footer-height) + 20px);
-  height: auto;
-  overflow-y: auto; /* * Allows vertical scrolling if content is too long */
+/* * --- Mobile Menu Beginning state for the animation --- */
+.mobile-nav-links li {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* * --- Mobile Menu Link Styles --- */
+.mobile-nav-links a {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-links a:hover {
+  color: var(--purple);
+}
+
+/* * --- Mobile Menu Active State (Triggers when menu opens) --- */
+.mobile-menu-overlay.active .mobile-nav-links li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* * --- Mobile Menu Links enter One after the other --- */
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.menu-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* * --- Hero Section --- */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height for mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1rem 2rem;
+  position: relative;
+}
+
+/* Improve scrolling on mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto; /* Disable smooth scrolling on mobile for better performance */
+  }
+
+  .hero {
+    min-height: 100dvh; /* Ensure proper height on mobile browsers */
+    padding: 4rem 1rem 2rem; /* Reduce padding on mobile */
+  }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.text-neon-gradient {
+  background: linear-gradient(to right, var(--purple), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-white-gradient {
+  color: var(--text);
+}
+
+.hero-subtitle {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* * --- Button & Badge Styles --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+  min-height: 44px; /* Ensure adequate touch target for mobile */
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: black;
+  box-shadow: 0 0 15px rgba(249, 245, 6, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(249, 245, 6, 0.6);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+/* * --- Section Styles --- */
+.section {
+  padding: 8rem 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--purple), var(--pink));
+  margin: 0 auto 2rem;
+}
+
+/* * --- Glass Effect Cards --- */
+.stat-card,
+.project-card,
+.contact-card {
+  background: linear-gradient(135deg, var(--card), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+  transition: var(--transition);
+}
+
+/* * --- About --- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+}
+
+.image-accent-glow {
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(45deg, var(--purple), var(--pink));
+  filter: blur(40px);
+  opacity: 0.3;
+  border-radius: var(--radius-small);
+  z-index: -1;
+}
+
+.profile-frame {
+  position: relative;
+  z-index: 1;
+}
+
+.profile-frame img {
+  width: 100%;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border);
+  box-shadow: 20px 20px 0 var(--card), 20px 20px 0 1px var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+/* * --- Skills --- */
+.skills-flex {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  list-style: none;
+}
+
+.skill-item {
+  text-align: center;
+}
+
+.skill-orb {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--card);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.skill-orb:hover {
+  transform: translateY(-5px) scale(1.1);
+  background: var(--bg);
+}
+
+/* Using data-skill to apply hover colours automatically */
+.skill-orb[data-skill="html"]:hover {
+  border-color: var(--color-html);
+  color: var(--color-html);
+  box-shadow: 0 0 20px var(--color-html);
+}
+.skill-orb[data-skill="css"]:hover {
+  border-color: var(--color-css);
+  color: var(--color-css);
+  box-shadow: 0 0 20px var(--color-css);
+}
+.skill-orb[data-skill="javascript"]:hover {
+  border-color: var(--color-javascript);
+  color: var(--color-javascript);
+  box-shadow: 0 0 20px var(--color-javascript);
+}
+.skill-orb[data-skill="cs"]:hover {
+  border-color: var(--color-cs);
+  color: var(--color-cs);
+  box-shadow: 0 0 20px var(--color-cs);
+}
+.skill-orb[data-skill="nodejs"]:hover {
+  border-color: var(--color-nodejs);
+  color: var(--color-nodejs);
+  box-shadow: 0 0 20px var(--color-nodejs);
+}
+
+/* * --- Projects --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* * --- Responsive projects grid --- */
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.project-card {
+  border-radius: var(--radius-small);
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.project-img {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.overlay-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff33;
+  backdrop-filter: blur(10px);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-yellow {
+  background: var(--primary);
+  color: black;
+}
+.btn-white {
+  background: white;
+  color: black;
+}
+
+.project-body {
+  padding: 1.5rem;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  list-style: none;
+}
+
+/* * --- Tag Styles --- */
+.tag {
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #94a3b81a; /* Fallback */
+  color: white;
+}
+
+[data-skill="html"] .tag,
+[data-skill="html"].tag {
+  background: var(--color-html);
+  color: white;
+}
+
+[data-skill="css"] .tag,
+[data-skill="css"].tag {
+  background: var(--color-css);
+  color: white;
+}
+
+[data-skill="javascript"] .tag,
+[data-skill="javascript"].tag {
+  background: var(--color-javascript);
+  color: white;
+}
+
+[data-skill="cs"] .tag,
+[data-skill="cs"].tag {
+  background: var(--color-cs);
+  color: white;
+}
+
+[data-skill="nodejs"] .tag,
+[data-skill="nodejs"].tag {
+  background: var(--color-nodejs);
+  color: white;
+}
+
+/* * --- Glow effects on hover --- */
+.glow-purple:hover {
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
+  border-color: var(--purple);
+}
+.glow-pink:hover {
+  box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.2);
+  border-color: var(--pink);
+}
+.glow-blue:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.4);
+  border-color: var(--blue);
+}
+
+/* * --- Contact --- */
+.contact-card {
+  border-radius: var(--radius-large);
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.card-bg-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.card-bg-glow.top {
+  top: -100px;
+  left: -100px;
+  background: var(--purple);
+}
+.card-bg-glow.bottom {
+  bottom: -100px;
+  right: -100px;
+  background: var(--pink);
+}
+
+.contact-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, var(--purple), var(--pink));
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* * --- Footer --- */
+.footer {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* * --- Text accents --- */
+.accent-purple {
+  color: var(--purple);
+  font-weight: bold;
+}
+.accent-pink {
+  color: var(--pink);
+  font-weight: bold;
+}
+
+.text-neon-purple {
+  color: var(--purple);
+}
+.text-neon-pink {
+  color: var(--pink);
+}
+.text-neon-blue {
+  color: var(--blue);
+}
+.text-primary {
+  color: var(--primary);
+}
+
+/* * --- Device Responsive Styles --- */
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profile-frame {
+    max-width: 320px;
+    margin: 0 auto 3rem;
+  }
+
+  .profile-frame img {
+    box-shadow: 12px 12px 0 var(--card), 12px 12px 0 1px var(--border);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle-btn {
+    display: flex;
+  }
+  .nav-links,
+  .nav-connect-btn {
+    display: none;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .section {
+    padding: 5rem 0;
+  }
+
+  /* * --- Responsive skill orbs --- */
+  .skill-orb {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* * --- Responsive mobile menu font --- */
+  .mobile-nav-links a {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta {
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* * --- Scroll Reveal Helper Class --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
