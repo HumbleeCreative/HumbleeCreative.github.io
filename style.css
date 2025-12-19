@@ -422,7 +422,7 @@ body {
 
 .btn-secondary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 20px var(--text);
+  box-shadow: 0 0 px var(--text);
 }
 
 .status-badge {
