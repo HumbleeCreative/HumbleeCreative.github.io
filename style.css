@@ -117,8 +117,8 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.15;
-  animation: pulse 10s infinite ease-in-out;
+  opacity: 0.05;
+  animation: pulse 15s infinite ease-in-out;
 }
 
 .purple-blob {
@@ -135,7 +135,7 @@ body {
   width: 450px;
   height: 450px;
   background: var(--pink);
-  animation-duration: 15s; /* Different speed to purple blob */
+  animation-duration: 10s; /* Different speed to purple blob */
   animation-direction: reverse;
 }
 
@@ -143,11 +143,11 @@ body {
   0%,
   100% {
     transform: scale(1) translate(0, 0);
-    opacity: 0.15;
+    opacity: 0.05;
   }
   50% {
     transform: scale(1.1) translate(20px, -20px);
-    opacity: 0.25;
+    opacity: 0.15;
   }
 }
 
@@ -414,8 +414,15 @@ body {
 }
 
 .btn-secondary {
+  background: var(--text);
   border: 1px solid var(--border);
-  color: var(--text);
+  color: var(--bg);
+  box-shadow: 0 0 10px var(--text);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--text);
 }
 
 .status-badge {
@@ -946,4 +953,29 @@ textarea {
 .revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+.dev-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 75%;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  background: var(--card); /* Subtle purple tint */
+  border-left: 3px solid var(--pink);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  text-align: left;
+  color: var(--text-muted);
+}
+
+.dev-note strong {
+  color: var(--primary);
+  display: block;
+}
+
+.dev-note .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 1.5rem;
 }
