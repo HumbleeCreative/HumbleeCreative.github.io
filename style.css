@@ -135,6 +135,7 @@ body {
   filter: blur(80px);
   opacity: 0.05;
   animation: pulse 15s infinite ease-in-out;
+  will-change: transform, opacity; /* Let's the browser know to prepare for animations*/
 }
 
 .purple-blob {
@@ -677,6 +678,7 @@ body {
   gap: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
 .project-card:hover .project-overlay {
@@ -941,6 +943,32 @@ textarea {
 
   .mobile-nav-links a {
     font-size: 2rem;
+  }
+  /* Removes the background blobs animations on mobile */
+  .blur-blob {
+    animation: none;
+    transform: scale(1);
+    opacity: 0.05;
+  }
+
+  .grid-layer {
+    opacity: 0.3;
+  }
+
+  /* Removes the blur and changes to Solid Cards on mobile */
+  .stat-card,
+  .project-card,
+  .contact-card {
+    /* Use a solid color instead of blur */
+    background: var(--card);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--glass-border);
+  }
+
+  .mobile-menu-overlay {
+    backdrop-filter: blur(4px) saturate(100%);
+    -webkit-backdrop-filter: blur(4px) saturate(100%);
   }
 }
 
