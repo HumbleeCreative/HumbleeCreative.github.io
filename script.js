@@ -233,6 +233,40 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(initParticles, 100);
   });
+
+  // * --- Mobile "Tap to Hover" Logic ---
+  // Check if the device supports touch (phones/tablets)
+  if ("ontouchstart" in window) {
+    // Select all the elements we want to be tappable
+    const interactiveItems = document.querySelectorAll(
+      ".project-card, .skill-orb, .about-image-wrapper"
+    );
+
+    // Adds a listener to each item
+    interactiveItems.forEach((item) => {
+      item.addEventListener("touchstart", function (e) {
+        // stopPropagation prevents the tap from immediately triggering the "background tap" below
+        e.stopPropagation();
+        // Toggle the active class on/off
+        this.classList.toggle("mobile-active");
+      });
+    });
+
+    // Adds only one listener to the whole page background
+    document.addEventListener("touchstart", function (e) {
+      // Check if what we tapped is NOT one of our interactive items
+      if (
+        !e.target.closest(".project-card") &&
+        !e.target.closest(".skill-orb") &&
+        !e.target.closest(".about-image-wrapper")
+      ) {
+        // If we tapped the background, remove the active class from everything
+        interactiveItems.forEach((item) => {
+          item.classList.remove("mobile-active");
+        });
+      }
+    });
+  }
 });
 
 // * --- Easter egg for anyone looking at the source code and console ---

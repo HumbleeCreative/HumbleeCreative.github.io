@@ -559,7 +559,8 @@ body:not(.dark-mode) .text-white-gradient {
   transition: transform 0.5s ease;
 }
 
-.about-image-wrapper:hover .profile-frame {
+.about-image-wrapper:hover .profile-frame,
+.about-image-wrapper.mobile-active .profile-frame {
   transform: rotate(0deg);
 }
 
@@ -662,43 +663,53 @@ body.dark-mode .skill-orb {
 }
 
 /* Skill Hover Effects */
-.skill-orb[data-skill="html"]:hover {
+.skill-orb[data-skill="html"]:hover,
+.skill-orb[data-skill="html"].mobile-active {
   border-color: var(--color-html);
   box-shadow: 0 0 25px rgba(227, 79, 38, 0.3);
 }
-.skill-orb[data-skill="html"]:hover .material-symbols-outlined {
+.skill-orb[data-skill="html"]:hover .material-symbols-outlined,
+.skill-orb[data-skill="html"].mobile-active {
   color: var(--color-html);
 }
 
-.skill-orb[data-skill="css"]:hover {
+.skill-orb[data-skill="css"]:hover,
+.skill-orb[data-skill="css"].mobile-active {
   border-color: var(--color-css);
   box-shadow: 0 0 25px rgba(21, 114, 182, 0.3);
 }
-.skill-orb[data-skill="css"]:hover .material-symbols-outlined {
+.skill-orb[data-skill="css"]:hover .material-symbols-outlined,
+.skill-orb[data-skill="css"].mobile-active .material-symbols-outlined {
   color: var(--color-css);
 }
 
-.skill-orb[data-skill="javascript"]:hover {
+.skill-orb[data-skill="javascript"]:hover,
+.skill-orb[data-skill="javascript"].mobile-active {
   border-color: var(--color-javascript);
   box-shadow: 0 0 25px rgba(247, 223, 30, 0.3);
 }
-.skill-orb[data-skill="javascript"]:hover .material-symbols-outlined {
+.skill-orb[data-skill="javascript"]:hover .material-symbols-outlined,
+.skill-orb[data-skill="javascript"].mobile-active .material-symbols-outlined {
   color: var(--color-javascript);
 }
 
-.skill-orb[data-skill="cs"]:hover {
+.skill-orb[data-skill="cs"]:hover,
+.skill-orb[data-skill="cs"].mobile-active {
   border-color: var(--color-cs);
   box-shadow: 0 0 25px rgba(104, 33, 122, 0.3);
 }
-.skill-orb[data-skill="cs"]:hover .material-symbols-outlined {
+.skill-orb[data-skill="cs"]:hover .material-symbols-outlined,
+.skill-orb[data-skill="cs"].mobile-active .material-symbols-outlined {
   color: var(--color-cs);
 }
 
-.skill-orb[data-skill="nodejs"]:hover {
+.skill-orb[data-skill="nodejs"]:hover,
+.skill-orb[data-skill="nodejs"].mobile-active {
   border-color: var(--color-nodejs);
   box-shadow: 0 0 25px rgba(51, 153, 51, 0.3);
 }
-.skill-orb[data-skill="nodejs"]:hover .material-symbols-outlined {
+.skill-orb[data-skill="nodejs"]:hover .material-symbols-outlined,
+.skill-orb[data-skill="nodejs"].mobile-active .material-symbols-outlined {
   color: var(--color-nodejs);
 }
 
@@ -748,7 +759,8 @@ body.dark-mode .project-card {
   backdrop-filter: blur(10px);
 }
 
-.project-card:hover {
+.project-card:hover,
+.project-card.mobile-active {
   transform: translateY(-10px);
 }
 
@@ -765,7 +777,8 @@ body.dark-mode .project-card {
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.project-card:hover .project-img img {
+.project-card:hover .project-img img,
+.project-card.mobile-active .project-img img {
   transform: scale(1.1);
 }
 
@@ -783,7 +796,8 @@ body.dark-mode .project-card {
   z-index: 10;
 }
 
-.project-card:hover .project-overlay {
+.project-card:hover .project-overlay,
+.project-card.mobile-active .project-overlay {
   opacity: 1;
 }
 
@@ -868,15 +882,18 @@ body.dark-mode .project-card {
 }
 
 /* Neon Glow Effects on Hover for Project Cards */
-.glow-purple:hover {
+.glow-purple:hover,
+.glow-purple.mobile-active {
   box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
   border-color: var(--purple);
 }
-.glow-pink:hover {
+.glow-pink:hover,
+.glow-pink.mobile-active {
   box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.4);
   border-color: var(--pink);
 }
-.glow-blue:hover {
+.glow-blue:hover,
+.glow-blue.mobile-active {
   box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
   border-color: var(--blue);
 }
