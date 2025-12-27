@@ -5,10 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lee Curtis Portfolio | Junior Developer</title>
-    <meta
-      name="description"
-      content="Portfolio of Lee Curtis, a Junior Developer specialising in full-stack web technologies."
-    />
 
     <!-- * Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,12 +36,11 @@
       rel="stylesheet"
     />
 
-    <!-- * Link to CSS File -->
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body class="dark-mode">
-    <!-- * Backgrounds -->
+    <!-- * Subtle background effects -->
     <div class="background-overlay">
       <div class="grid-layer"></div>
     </div>
@@ -89,7 +84,7 @@
 
       <!-- * Mobile menu overlay -->
       <div id="mobile-menu" class="mobile-menu-overlay">
-        <button id="menu-close" class="menu-close-btn" aria-label="Close Menu">
+        <button id="menu-close" class="menu-close-btn">
           <span class="material-symbols-outlined">close</span>
         </button>
         <ul class="mobile-nav-links">
@@ -105,24 +100,25 @@
     <main>
       <!-- * Hero section -->
       <section id="home" class="hero">
-        <!-- Canvas Animation for Background -->
-        <canvas id="hero-canvas"></canvas>
+        <div class="blur-blob purple-blob"></div>
+        <div class="blur-blob pink-blob"></div>
 
         <div class="hero-content">
-          <!-- Dev Note -->
           <div class="dev-note">
-            <span class="material-symbols-outlined">verified</span>
+            <span class="material-symbols-outlined"
+              ><span class="text-neon-gradient">person_alert</span></span
+            >
             <p>
-              <strong>Current Status:</strong> Mobile Safari issues should now
-              be resolved by using Canvas rendering and particle effects instead
-              of a blur filter.
+              <strong><span class="text-neon-gradient">Dev Note:</span></strong>
+              I have noticed some performance issues on mobile Safari. I am
+              currently looking in to different optimisations and fixes. This is
+              still a work in progress
             </p>
           </div>
-
           <div class="status-badge">
             <span class="status-dot"></span>
-            <span class="text-neon-gradient">Current Project:</span> Portfolio
-            Website V2
+            <span class="text-neon-gradient">Current Project:</span>Portfolio
+            Website
           </div>
 
           <h1 class="hero-title">
@@ -141,8 +137,8 @@
               View My Work
               <span class="material-symbols-outlined">arrow_forward</span>
             </a>
-            <a href="#contact" class="btn btn-secondary">
-              Contact Me
+            <a href="#contact" class="btn btn-secondary"
+              >Contact Me
               <span class="material-symbols-outlined">chat</span>
             </a>
           </div>
@@ -152,7 +148,7 @@
       <!-- About section -->
       <section id="about" class="section about">
         <div class="container about-grid">
-          <div class="about-image-wrapper reveal">
+          <div class="about-image-wrapper">
             <div class="image-accent-glow"></div>
             <figure class="profile-frame">
               <img
@@ -162,7 +158,7 @@
             </figure>
           </div>
 
-          <div class="about-text reveal">
+          <div class="about-text">
             <h2 class="section-title">
               About <span class="text-neon-gradient">Me</span>
             </h2>
@@ -194,11 +190,11 @@
             </p>
 
             <div class="stats-grid">
-              <div class="stat-card reveal">
+              <div class="stat-card">
                 <span class="stat-num text-neon-pink">1+</span>
                 <span class="stat-label">Years Experience</span>
               </div>
-              <div class="stat-card reveal">
+              <div class="stat-card">
                 <span class="stat-num text-neon-blue">2+</span>
                 <span class="stat-label">Projects Deployed</span>
               </div>
@@ -210,36 +206,36 @@
       <!-- * Skills section -->
       <section id="skills" class="section skills-section">
         <div class="container text-center">
-          <h2 class="section-title reveal">
+          <h2 class="section-title">
             <span class="text-neon-pink">Skills</span>
           </h2>
 
           <ul class="skills-flex">
-            <li class="skill-item reveal">
+            <li class="skill-item">
               <div class="skill-orb" data-skill="html">
                 <span class="material-symbols-outlined">html</span>
               </div>
               <span class="skill-name">HTML5</span>
             </li>
-            <li class="skill-item reveal">
+            <li class="skill-item">
               <div class="skill-orb" data-skill="css">
                 <span class="material-symbols-outlined">css</span>
               </div>
               <span class="skill-name">CSS3</span>
             </li>
-            <li class="skill-item reveal">
+            <li class="skill-item">
               <div class="skill-orb" data-skill="javascript">
                 <span class="material-symbols-outlined">javascript</span>
               </div>
               <span class="skill-name">JS</span>
             </li>
-            <li class="skill-item reveal">
+            <li class="skill-item">
               <div class="skill-orb" data-skill="cs">
                 <span class="material-symbols-outlined">code</span>
               </div>
               <span class="skill-name">C#</span>
             </li>
-            <li class="skill-item reveal">
+            <li class="skill-item">
               <div class="skill-orb" data-skill="nodejs">
                 <span class="material-symbols-outlined">terminal</span>
               </div>
@@ -253,7 +249,7 @@
       <section id="projects" class="section">
         <div class="container">
           <header class="section-header">
-            <div class="reveal">
+            <div>
               <h2 class="section-title">
                 My <span class="text-neon-purple">Projects</span>
               </h2>
@@ -263,7 +259,7 @@
             </div>
             <a
               href="https://github.com/HumbleeCreative"
-              class="github-link reveal"
+              class="github-link"
               target="_blank"
               rel="noopener"
             >
@@ -273,19 +269,20 @@
           </header>
 
           <div class="projects-grid">
-            <!-- Project 1 -->
-            <article class="project-card glow-purple reveal">
+            <!-- ! IMPORTANT: Placeholder projects - These will be replaced with real projects as I create them -->
+            <!-- Project 1: Placeholder 1 -->
+            <article class="project-card glow-purple">
               <div class="project-img">
                 <div class="project-overlay">
-                  <button class="overlay-btn btn-yellow" aria-label="View Code">
+                  <button class="overlay-btn btn-yellow">
                     <span class="material-symbols-outlined">code</span>
                   </button>
-                  <button class="overlay-btn btn-white" aria-label="View Live">
+                  <button class="overlay-btn btn-white">
                     <span class="material-symbols-outlined">visibility</span>
                   </button>
                 </div>
                 <img
-                  src="https://picsum.photos/id/48/600/400"
+                  src="https://placehold.co/600x400/cc66ff/FFF?text=Project\n1"
                   alt="Placeholder for Project 1"
                 />
               </div>
@@ -293,7 +290,7 @@
                 <h3>Placeholder 1</h3>
                 <p>
                   This is a placeholder project. These will be replaced with
-                  real projects as I create them.
+                  real projects as I create them
                 </p>
                 <ul class="tag-group">
                   <li><span class="tag" data-skill="html">HTML</span></li>
@@ -304,20 +301,19 @@
                 </ul>
               </div>
             </article>
-
-            <!-- Project 2 -->
-            <article class="project-card glow-blue reveal">
+            <!-- Project 2: Placeholder 2 -->
+            <article class="project-card glow-blue">
               <div class="project-img">
                 <div class="project-overlay">
-                  <button class="overlay-btn btn-yellow" aria-label="View Code">
+                  <button class="overlay-btn btn-yellow">
                     <span class="material-symbols-outlined">code</span>
                   </button>
-                  <button class="overlay-btn btn-white" aria-label="View Live">
+                  <button class="overlay-btn btn-white">
                     <span class="material-symbols-outlined">visibility</span>
                   </button>
                 </div>
                 <img
-                  src="https://picsum.photos/id/201/600/400"
+                  src="https://placehold.co/600x400/6699ff/FFF?text=Project\n2"
                   alt="Placeholder for Project 2"
                 />
               </div>
@@ -325,7 +321,7 @@
                 <h3>Placeholder 2</h3>
                 <p>
                   This is a placeholder project. These will be replaced with
-                  real projects as I create them.
+                  real projects as I create them
                 </p>
                 <ul class="tag-group">
                   <li><span class="tag" data-skill="html">HTML</span></li>
@@ -336,20 +332,19 @@
                 </ul>
               </div>
             </article>
-
-            <!-- Project 3 -->
-            <article class="project-card glow-pink reveal">
+            <!-- Project 3: Placeholder 3 -->
+            <article class="project-card glow-pink">
               <div class="project-img">
                 <div class="project-overlay">
-                  <button class="overlay-btn btn-yellow" aria-label="View Code">
+                  <button class="overlay-btn btn-yellow">
                     <span class="material-symbols-outlined">code</span>
                   </button>
-                  <button class="overlay-btn btn-white" aria-label="View Live">
+                  <button class="overlay-btn btn-white">
                     <span class="material-symbols-outlined">visibility</span>
                   </button>
                 </div>
                 <img
-                  src="https://picsum.photos/id/366/600/400"
+                  src="https://placehold.co/600x400/ff66ff/FFF?text=Project\n3"
                   alt="Placeholder for Project 3"
                 />
               </div>
@@ -357,7 +352,7 @@
                 <h3>Placeholder 3</h3>
                 <p>
                   This is a placeholder project. These will be replaced with
-                  real projects as I create them.
+                  real projects as I create them
                 </p>
                 <ul class="tag-group">
                   <li><span class="tag" data-skill="html">HTML</span></li>
@@ -375,7 +370,7 @@
       <!-- * Contact section -->
       <section id="contact" class="section contact-section">
         <div class="container-narrow">
-          <div class="contact-card reveal">
+          <div class="contact-card">
             <div class="card-bg-glow top"></div>
             <div class="card-bg-glow bottom"></div>
 
@@ -428,7 +423,6 @@
       </div>
     </footer>
 
-    <!-- * Link to JS File -->
     <script src="script.js" defer></script>
   </body>
 </html>
