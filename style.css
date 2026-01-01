@@ -811,6 +811,8 @@ body.dark-mode .project-card {
   border: none;
   cursor: pointer;
   transition: transform 0.2s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .overlay-btn:hover {
